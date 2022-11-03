@@ -26,7 +26,7 @@ extension LinkedListChallenges {
 
         var result: [T] = []
 
-        func addInReverse(_ node: Node<T>?) {
+        func addInReverse(_ node: LinkedList<T>.Node<T>?) {
 
             guard let node = node else { return }
             addInReverse(node.next)
@@ -109,8 +109,8 @@ extension LinkedListChallenges {
         guard left.isEmpty == false else { return right }
         guard right.isEmpty == false else { return left }
 
-        var newHead: Node<T>?
-        var newTail: Node<T>?
+        var newHead: LinkedList<T>.Node<T>?
+        var newTail: LinkedList<T>.Node<T>?
 
         var currentLeft = left.head
         var currentRight = right.head

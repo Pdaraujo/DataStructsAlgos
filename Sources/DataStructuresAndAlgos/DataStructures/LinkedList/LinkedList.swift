@@ -16,7 +16,13 @@ public struct LinkedList<Value> {
 
     public var isEmpty: Bool { self.head == nil }
 
-    public mutating func push(_ value: Value) {
+
+}
+
+// MARK: - Methods
+public extension LinkedList {
+
+    mutating func push(_ value: Value) {
 
         self.copyNodes()
 
@@ -28,7 +34,7 @@ public struct LinkedList<Value> {
         }
     }
 
-    public mutating func append(_ value: Value) {
+    mutating func append(_ value: Value) {
 
         self.copyNodes()
 
@@ -43,7 +49,7 @@ public struct LinkedList<Value> {
         self.tail = self.tail?.next
     }
 
-    public mutating func node(at index: Int) -> Node<Value>? {
+    mutating func node(at index: Int) -> Node<Value>? {
 
         self.copyNodes()
 
@@ -60,7 +66,7 @@ public struct LinkedList<Value> {
     }
 
     @discardableResult
-    public mutating func insert(value: Value, after node: Node<Value>) -> Node<Value>? {
+    mutating func insert(value: Value, after node: Node<Value>) -> Node<Value>? {
 
         self.copyNodes()
 
@@ -76,7 +82,7 @@ public struct LinkedList<Value> {
     }
 
     @discardableResult
-    public mutating func pop() -> Value? {
+    mutating func pop() -> Value? {
 
         self.copyNodes()
 
@@ -91,7 +97,7 @@ public struct LinkedList<Value> {
     }
 
     @discardableResult
-    public mutating func removeLast() -> Value? {
+    mutating func removeLast() -> Value? {
 
         self.copyNodes()
 
@@ -115,7 +121,7 @@ public struct LinkedList<Value> {
     }
 
     @discardableResult
-    public mutating func remove(after node: Node<Value>) -> Value? {
+    mutating func remove(after node: Node<Value>) -> Value? {
 
         guard let node = copyNodes(returningCopyOf: node) else { return nil }
 
@@ -131,7 +137,7 @@ public struct LinkedList<Value> {
         return node.next?.value
     }
 
-    public mutating func reverse() {
+    mutating func reverse() {
 
         self.tail = self.head
         var prev = self.head
@@ -150,6 +156,7 @@ public struct LinkedList<Value> {
         self.head = prev
     }
 }
+
 // MARK: - Collection
 extension LinkedList: Collection {
 
