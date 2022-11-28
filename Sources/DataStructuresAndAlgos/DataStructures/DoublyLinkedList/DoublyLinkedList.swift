@@ -17,9 +17,27 @@ public class DoublyLinkedList<T> {
     public var isEmpty: Bool { self.head == nil }
 
     public var first: Node<T>? { self.head }
+    public var last: Node<T>? { self.tail }
 }
 
 public extension DoublyLinkedList {
+
+    func prepend(_ value: T) {
+
+        let newNode = Node(value: value)
+
+        guard let headNode = self.head else {
+
+            self.head = newNode
+            self.tail = newNode
+            return
+        }
+
+        newNode.previous = nil
+        newNode.next = headNode
+        headNode.previous = newNode
+        self.head = newNode
+    }
 
     func append(_ value: T) {
 
