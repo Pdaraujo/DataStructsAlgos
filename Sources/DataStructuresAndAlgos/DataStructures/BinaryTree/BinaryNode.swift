@@ -41,6 +41,19 @@ public class BinaryNode<Element> {
 
         visit(self.value)
     }
+
+    func invertTree(_ root: BinaryNode?) -> BinaryNode? {
+
+        guard let root = root else { return nil }
+
+        let tempLeft = invertTree(root.rightChild)
+        let tempRight = invertTree(root.leftChild)
+
+        root.leftChild = tempLeft
+        root.rightChild = tempRight
+
+        return root
+    }
 }
 
 extension BinaryNode: CustomStringConvertible {

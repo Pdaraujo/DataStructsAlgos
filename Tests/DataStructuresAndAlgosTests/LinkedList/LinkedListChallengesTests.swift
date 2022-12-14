@@ -1,6 +1,6 @@
 //
 //  LinkedListChallengesTests.swift
-//  
+//
 //
 //  Created by Diogo Araújo on 28/10/2022.
 //
@@ -115,5 +115,119 @@ class LinkedListChallengesTests: XCTestCase {
         let result = self.stub.removeAll(3, in: list)
 
         XCTAssertEqual("\(result)", "1 -> 1 -> 2 -> 2   ")
+    }
+
+    func testMergeK() throws {
+
+        class ListNode {
+            public var val: Int
+            public var next: ListNode?
+            public init() { self.val = 0; self.next = nil; }
+            public init(_ val: Int) { self.val = val; self.next = nil; }
+        }
+
+        func createList(from nums: [Int]) -> ListNode? {
+
+            var head = ListNode(nums[0])
+            var current: ListNode? = head
+
+            for i in 1..<nums.count {
+
+                current?.next = ListNode(nums[i])
+                current = current?.next
+            }
+
+            return head
+        }
+
+        func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+
+            guard lists.isEmpty == false else { return nil }
+
+            var newLists = lists
+
+            while newLists.count > 1 {
+
+                var mergedList = [ListNode?]()
+
+                for i in stride(from: 0, to: newLists.count, by: 2) {
+
+                    let list1 = newLists[i]
+
+                    guard (i + 1) < newLists.count else {
+
+                        mergedList.append(list1)
+                        continue
+                    }
+
+                    let list2 = lists[i + 1]
+                    let merged = merge(l1: list1, l2: list2)
+
+                    mergedList.append(merged)
+                }
+
+                newLists = mergedList
+            }
+
+            if let node = newLists.first {
+
+                return node
+            }
+
+            return nil
+        }
+
+        func merge(l1: ListNode?, l2: ListNode?) -> ListNode? {
+
+            guard let l1 = l1 else { return l2 }
+            guard let l2 = l2 else { return l1 }
+
+            var current1: ListNode? = l1
+            var current2: ListNode? = l2
+
+            var head: ListNode?
+            var current: ListNode?
+
+            if l1.val > l2.val {
+
+                head = current2
+                current2 = current2?.next
+            } else {
+
+                head = current1
+                current1 = current1?.next
+            }
+
+            current = head
+
+            while let c1 = current1, let c2 = current2 {
+
+                if c1.val > c2.val {
+
+                    current?.next = current2
+                    current2 = current2?.next
+                } else {
+
+                    current?.next = current1
+                    current1 = current1?.next
+                }
+
+                current = current?.next
+            }
+
+            if current1 != nil {
+
+                current?.next = current1
+            }
+
+            if current2 != nil {
+
+                current?.next = current2
+            }
+            print(head)
+            return head
+        }
+
+        mergeKLists([createList(from: [1,4,5]),createList(from: [1,3,4]),createList(from: [2,6])])
     }
 }
