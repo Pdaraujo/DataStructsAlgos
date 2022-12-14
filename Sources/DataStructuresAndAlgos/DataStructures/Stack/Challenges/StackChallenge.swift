@@ -60,3 +60,55 @@ extension StackChallenges {
         return stack.isEmpty
     }
 }
+
+extension StackChallenges {
+
+    func evalRPN(_ tokens: [String]) -> Int {
+
+        let operators = ["+", "-", "*", "/"]
+        var stack: [String] = []
+        var result = ""
+
+        func isOperator(_ op: String) -> Bool {
+
+            operators.contains(op)
+        }
+
+        var resulta = ""
+
+        switch resulta {
+
+        case "+":
+            print("cenas")
+        default:
+            print("cenas")
+        }
+
+        for token in tokens {
+
+            if isOperator(token) {
+
+                if result.isEmpty {
+
+                    let last = stack.removeLast()
+                    let lastLast = stack.removeLast()
+
+                    result += ( "(" + lastLast + token + last + ")")
+                } else {
+
+                    let last = stack.removeLast()
+
+                    result = ("(" + last + token + result + ")")
+                }
+
+            } else {
+
+                stack.append(token)
+            }
+        }
+
+        let exp = NSExpression(format: result)
+
+        return (exp.expressionValue(with: nil, context: nil) as? Int) ?? 0
+    }
+}

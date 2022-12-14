@@ -45,4 +45,11 @@ class StackChallengesTests: XCTestCase {
         XCTAssertTrue(responseOne)
         XCTAssertFalse(responseTwo)
     }
+
+    func testEvaluateReversePolishNotation() throws {
+
+        let result = self.stub.evalRPN(["2","1","+","3","*"])
+
+        XCTAssertTrue(result == 9)
+    }
 }

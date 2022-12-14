@@ -213,4 +213,45 @@ extension LinkedListChallenges {
 
         return listCopy
     }
+
+    func reorderList<T>(_ head: LinkedList<T>.Node<T>?) {
+
+        if head == nil || head?.next == nil {
+            return
+        }
+
+        var p1 = head
+        var p2 = head
+
+        //Find middle to divide linked list in 2 lists
+        while p2?.next != nil && p2?.next?.next != nil {
+            p1 = p1?.next
+            p2 = p2?.next?.next
+        }
+
+        let preMiddle = p1
+        let preCur = p1?.next
+
+        // Inverse second list
+        while preCur?.next != nil {
+
+            let cur = preCur?.next
+            preCur?.next = cur?.next
+            cur?.next = preMiddle?.next
+            preMiddle?.next = cur
+        }
+
+        p1 = head
+        p2 = preMiddle?.next
+
+        // merge both lists first form 1 and then form 2
+        while p1 !== preMiddle {
+
+            preMiddle?.next = p2?.next
+            p2?.next = p1?.next
+            p1?.next = p2
+            p1 = p2?.next
+            p2 = preMiddle?.next
+        }
+    }
 }
