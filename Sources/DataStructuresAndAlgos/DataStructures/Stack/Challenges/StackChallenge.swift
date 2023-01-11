@@ -74,16 +74,6 @@ extension StackChallenges {
             operators.contains(op)
         }
 
-        var resulta = ""
-
-        switch resulta {
-
-        case "+":
-            print("cenas")
-        default:
-            print("cenas")
-        }
-
         for token in tokens {
 
             if isOperator(token) {
