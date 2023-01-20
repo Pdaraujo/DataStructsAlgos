@@ -128,7 +128,7 @@ class LinkedListChallengesTests: XCTestCase {
 
         func createList(from nums: [Int]) -> ListNode? {
 
-            var head = ListNode(nums[0])
+            let head = ListNode(nums[0])
             var current: ListNode? = head
 
             for i in 1..<nums.count {
@@ -224,10 +224,9 @@ class LinkedListChallengesTests: XCTestCase {
 
                 current?.next = current2
             }
-            print(head)
             return head
         }
 
-        mergeKLists([createList(from: [1,4,5]),createList(from: [1,3,4]),createList(from: [2,6])])
+//        mergeKLists([createList(from: [1,4,5]),createList(from: [1,3,4]),createList(from: [2,6])])
     }
 }
