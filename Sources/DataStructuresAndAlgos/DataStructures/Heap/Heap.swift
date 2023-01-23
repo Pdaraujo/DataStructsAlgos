@@ -9,7 +9,7 @@ import Foundation
 
 public struct Heap<Element: Equatable> {
     
-    private(set) var elements: [Element] = []
+    var elements: [Element] = []
     let sort: (Element, Element) -> Bool
     
     public init(elements: [Element] = [], sort: @escaping (Element, Element) -> Bool) {
@@ -110,7 +110,7 @@ public extension Heap {
     }
 }
 
-private extension Heap {
+extension Heap {
 
     mutating func buildHeap() {
 
@@ -122,9 +122,10 @@ private extension Heap {
         }
     }
     
-    mutating func siftDown(from index: Int) {
+    mutating func siftDown(from index: Int, upTo size: Int? = nil) {
         
         var parent = index
+        let size = size ?? self.count
         
         while true {
             
@@ -133,12 +134,12 @@ private extension Heap {
             
             var candidate = parent
             
-            if left < self.count && self.sort(self.elements[left], self.elements[candidate]) {
+            if left < size && self.sort(self.elements[left], self.elements[candidate]) {
                 
                 candidate = left
             }
             
-            if right < self.count && self.sort(self.elements[right], self.elements[candidate]) {
+            if right < size && self.sort(self.elements[right], self.elements[candidate]) {
                 
                 candidate = right
             }
